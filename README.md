@@ -39,7 +39,8 @@ Amazon EC2 (EC2) instance and the other will be Amazon DynamoDB (DDB) Table (alt
     * Take a look into the folder called `cdk`, this folder contains a simple CDK construct with some AWS SNS and AWS SQS constructs.
     * CDK serves a deployment mechanism for AWS, similarly to cloudformation and/or terraform, we could learn from ways it works and inner functioning how to enable granular policy generation. 
     * learn more about CDK, [here](https://aws.amazon.com/cdk/)
-    * activate virtualenv via `source .venv/bin/activate` and install project dependencies using `pip install -r requirements.txt`
+    * activate virtualenv via `source .venv/bin/activate` and amend project dependencies to contain DDB in `setup.py` and install project dependencies using `pip install -r requirements.txt`
+    * replace `cdk/cdk_stack.py` for a file that you can find in this repo. Explore the file.
 9. Run `cdk synth` to generate granular policy within CF template and use this policy in order to create a new policy called `ddb-ro-granular-access-policy`
 10. By running `cd deploy`, we deploy the Role, that goes like `ddb-ro-granular-access` and use very granular Policy
     * we can also run `cdk synth` to preview what will get deployed
