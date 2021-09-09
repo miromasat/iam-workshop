@@ -16,6 +16,7 @@ Resources:
            #!/bin/bash 
            
            sudo apt update -y
+           git clone https://github.com/miromasat/iam-workshop-2021.git
            sudo apt install nodejs -y
            sudo apt install npm -y
            sudo npm install -g aws-cdk
@@ -32,8 +33,15 @@ Resources:
           CidrIp: 0.0.0.0/0
           
   Granular:
-    Type: AWS::DynamoDB::Table
-    Properties:
+     Type: AWS::DynamoDB::Table
+     Properties:
+      AttributeDefinitions:
+        -
+          AttributeName: "id"
+          AttributeType: "N"
+        -
+          AttributeName: "accessible"
+          AttributeType: "S"
       KeySchema:
         -
           AttributeName: "id"
@@ -41,14 +49,27 @@ Resources:
         -
           AttributeName: "accessible"
           KeyType: "RANGE"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5   
   
   Coarse:
     Type: AWS::DynamoDB::Table
     Properties:
+      AttributeDefinitions:
+        -
+          AttributeName: "id"
+          AttributeType: "N"
+        -
+          AttributeName: "accessible"
+          AttributeType: "S"
       KeySchema:
         -
           AttributeName: "id"
           KeyType: "HASH"
         -
           AttributeName: "accessible"
-          KeyType: "RANGE"        
+          KeyType: "RANGE"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5    
