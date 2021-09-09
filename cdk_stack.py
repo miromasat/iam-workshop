@@ -14,11 +14,13 @@ class CdkStack(core.Stack):
         
         table = dynamodb.Table(self, "MyGranularTable",
             partition_key=Attribute(name="id", type=dynamodb.AttributeType.NUMBER),
-            sort_key=Attribute(name="accessible", type=dynamodb.AttributeType.STRING)
+            sort_key=Attribute(name="accessible", type=dynamodb.AttributeType.STRING),
+            table_name="Granular"
         )
 
         role = iam.Role(self, "MyGranularRole", 
-            assumed_by=iam.ServicePrincipal('ec2.amazonaws.com')
+            assumed_by=iam.ServicePrincipal('ec2.amazonaws.com'),
+            role_name="ddb-ro-granular-access"
         )
         
         table.grant_read_data(role)
