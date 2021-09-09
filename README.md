@@ -27,3 +27,11 @@ Amazon EC2 (EC2) instance and the other will be Amazon DynamoDB (DDB) Table (alt
     * Assume this new role by AWS SimpleTokenService (STS) via this shortcut command: 
     `eval $(aws sts assume-role --role-arn arn:aws:iam::123456789123:role/ddb-ro-access --role-session-name test | jq -r '.Credentials | "export AWS_ACCESS_KEY_ID=\(.AccessKeyId)\nexport AWS_SECRET_ACCESS_KEY=\(.SecretAccessKey)\nexport AWS_SESSION_TOKEN=\(.SessionToken)\n"')`
     Inspired by this [StackOverFlow post](https://stackoverflow.com/questions/63241009/aws-sts-assume-role-in-one-command)
+    * Did this succeed? If not, why?
+8. Take a look into the folder called `cdk`, this folder contains a simple CDK project that has defined 2 resources and a relationship between that.
+    * CDK serves a deployment mechanism for AWS, similarly to cloudformation and/or terraform, we could learn from ways it works and inner functioning how to enable granular policy generation. 
+    * learn more about CDK, [here](https://aws.amazon.com/cdk/)
+9. Run `cdk synth` to generate granular policy within CF template and use this policy in order to create a new policy called `ddb-ro-granular-access-policy`
+10. After we create the policy, we create the Role, that we call `ddb-ro-granular-access` and use Policy `ddb-ro-granular-access-policy`, which we created in the `Step 9`
+    * Optionally, use generated CloudFormation template to deploy this new role and new DDB table
+11. Take the policy from `Step 9` and corresponding role from `Step 10` and restrict these policies to only be able to read rows that have column called `accessible` set as `true`
