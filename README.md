@@ -29,7 +29,7 @@ Amazon EC2 (EC2) instance and the other will be Amazon DynamoDB (DDB) Table (alt
     * pick `DynamoDB` as a `Service` 
     * pick `Read` as an `Action`
 6. After we create the policy, we create the Role, that we call `ddb-ro-access` and use Policy `ddb-ro-access-policy`, which we created in the `Step 5`
-7. Go back to instance from `Step 2` and `Step 4` and try to use this newly created role `ddb-ro-access`. We can do this in two ways:
+7. Go back to instance from `Step 2` and `Step 4` and try to use this newly created role `ddb-ro-access`. We can do this by:
     * Assume this new role by AWS SimpleTokenService (STS) via this shortcut command: 
     `eval $(aws sts assume-role --role-arn arn:aws:iam::123456789123:role/ddb-ro-access --role-session-name test | jq -r '.Credentials | "export AWS_ACCESS_KEY_ID=\(.AccessKeyId)\nexport AWS_SECRET_ACCESS_KEY=\(.SecretAccessKey)\nexport AWS_SESSION_TOKEN=\(.SessionToken)\n"')`
     Inspired by this [StackOverFlow post](https://stackoverflow.com/questions/63241009/aws-sts-assume-role-in-one-command)
