@@ -31,28 +31,6 @@ Resources:
           FromPort: 22
           ToPort: 22
           CidrIp: 0.0.0.0/0
-          
-  Granular:
-     Type: AWS::DynamoDB::Table
-     Properties:
-      AttributeDefinitions:
-        -
-          AttributeName: "id"
-          AttributeType: "N"
-        -
-          AttributeName: "accessible"
-          AttributeType: "S"
-      KeySchema:
-        -
-          AttributeName: "id"
-          KeyType: "HASH"
-        -
-          AttributeName: "accessible"
-          KeyType: "RANGE"
-      ProvisionedThroughput:
-        ReadCapacityUnits: 5
-        WriteCapacityUnits: 5   
-  
   Coarse:
     Type: AWS::DynamoDB::Table
     Properties:
