@@ -1,0 +1,54 @@
+Parameters:
+  KeyName:
+    Description: The EC2 Key Pair to allow SSH access to the instance
+    Type: 'AWS::EC2::KeyPair::KeyName'
+Resources:
+  Ec2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
+      KeyName: !Ref KeyName
+      ImageId: 'ami-09e67e426f25ce0d7'
+      InstanceType: 't3a.medium'
+      UserData:
+        Fn::Base64: !Sub |
+           #!/bin/bash 
+           
+           sudo apt update -y
+           sudo apt install nodejs -y
+           sudo apt install npm -y
+           sudo npm install -g aws-cdk
+           sudo apt install python3-pip -y
+           pip install boto3
+  InstanceSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Enable SSH access via port 22
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+          
+  Granular:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      KeySchema:
+        -
+          AttributeName: "id"
+          KeyType: "HASH"
+        -
+          AttributeName: "accessible"
+          KeyType: "RANGE"
+  
+  Coarse:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      KeySchema:
+        -
+          AttributeName: "id"
+          KeyType: "HASH"
+        -
+          AttributeName: "accessible"
+          KeyType: "RANGE"        
