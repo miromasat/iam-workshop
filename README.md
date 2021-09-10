@@ -35,8 +35,7 @@ Amazon EC2 (EC2) instance and the other will be Amazon DynamoDB (DDB) Table (alt
     Inspired by this [StackOverFlow post](https://stackoverflow.com/questions/63241009/aws-sts-assume-role-in-one-command)
     * Did this succeed? If not, why?
     * rerun `python3 granular_result.py` and discuss results
-8. Create a new folder called `cdk`, enter it `cd cdk` and innitiate a new project via `cdk init sample-app --language python` 
-    * COnsider doing this step in AWS Cloud9 environment
+8. (Consider doing this step in AWS Cloud9 environment) Create a new folder called `cdk`, enter it `cd cdk` and innitiate a new project via `cdk init sample-app --language python` 
     * Take a look into the folder called `cdk`, this folder contains a simple CDK construct with some AWS SNS and AWS SQS constructs.
     * CDK serves a deployment mechanism for AWS, similarly to cloudformation and/or terraform, we could learn from ways it works and inner functioning how to enable granular policy generation. 
     * learn more about CDK, [here](https://aws.amazon.com/cdk/)
