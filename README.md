@@ -40,6 +40,7 @@ Amazon EC2 (EC2) instance and the other will be Amazon DynamoDB (DDB) Table (alt
     * CDK serves a deployment mechanism for AWS, similarly to cloudformation and/or terraform, we could learn from ways it works and inner functioning how to enable granular policy generation. 
     * learn more about CDK, [here](https://aws.amazon.com/cdk/)
     * activate virtualenv via `source .venv/bin/activate` 
+    * note: if activation of virtualenv did not work, consider running `apt install python3.8-venv`
     * amend project dependencies to contain DDB in `setup.py` 
     * install project dependencies using `pip install -r requirements.txt`
     * replace `cdk/cdk_stack.py` for a file that you can find in this repo. Explore the file.
