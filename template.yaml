@@ -21,7 +21,7 @@ Resources:
            sudo npm install -g aws-cdk
            sudo apt install python3-pip -y
            pip install boto3
-           sudo pip install --upgrade --user awscli
+           sudo snap install aws-cli --classic
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
