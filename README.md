@@ -17,14 +17,14 @@ Amazon EC2 (EC2) instance and the other will be Amazon DynamoDB (DDB) Table (alt
     * `cdk --version`, which ensure aws binary is installed
     * `aws --version`, which ensures cdk binary is installed
     * take a look at `granular_result.py` file and spend a minute understanding it.
-    * run `granular_result.py` and discuss results and see eveything fail :) why?
+    * run `python3 granular_result.py` and discuss results and see eveything fail :) why?
 3. Start by going into IAM and create an IAM Role with attached managed PowerUser Policy. Name this role `pu-access`
     * PowerUser Policy document is very powerfull and will initially let us access not only DDB (and all its content) but all other services with the exception of IAM itself.
     * More about managed policies [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies)
 4. Attach this newly created role `pu-access` to the instance you are logged into from `Step 2`. To verify, that instance can now access other services.
     * Notice, that the instance did not need to be restarted.
     * Notice, that by querying the metaservice `curl 169.254.169.254` you get temporary credetials that in turn let you execute commands.
-    * run `granular_result.py` and discuss results
+    * rerun `python3 granular_result.py` and discuss results
 5. Let's now create another IAM Role, this time, using AWS IAM Policy Wizard. After going into IAM Console, we navigate into Policies Submenu and we follow the wizard and call the role `ddb-ro-access-policy`:
     * pick `DynamoDB` as a `Service` 
     * pick `Read` as an `Action`
@@ -34,7 +34,7 @@ Amazon EC2 (EC2) instance and the other will be Amazon DynamoDB (DDB) Table (alt
     `eval $(aws sts assume-role --role-arn arn:aws:iam::123456789123:role/ddb-ro-access --role-session-name test | jq -r '.Credentials | "export AWS_ACCESS_KEY_ID=\(.AccessKeyId)\nexport AWS_SECRET_ACCESS_KEY=\(.SecretAccessKey)\nexport AWS_SESSION_TOKEN=\(.SessionToken)\n"')`
     Inspired by this [StackOverFlow post](https://stackoverflow.com/questions/63241009/aws-sts-assume-role-in-one-command)
     * Did this succeed? If not, why?
-    * rerun `granular_result.py` and discuss results
+    * rerun `python3 granular_result.py` and discuss results
 8. Create a new folder called `cdk`, enter it `cd cdk` and innitiate a new project via `cdk init sample-app --language python` 
     * Take a look into the folder called `cdk`, this folder contains a simple CDK construct with some AWS SNS and AWS SQS constructs.
     * CDK serves a deployment mechanism for AWS, similarly to cloudformation and/or terraform, we could learn from ways it works and inner functioning how to enable granular policy generation. 
@@ -45,4 +45,4 @@ Amazon EC2 (EC2) instance and the other will be Amazon DynamoDB (DDB) Table (alt
     * replace `cdk/cdk_stack.py` for a file that you can find in this repo. Explore the file.
 9. By running `cd deploy`, we deploy the Role, that goes like `ddb-ro-granular-access` and use very granular Policy
     * we can also run `cdk synth` to preview what will get deployed
-10. Assume this newly created role similarly to `Step 7`, rerun `granular_result.py` and discuss results
+10. Assume this newly created role similarly to `Step 7`, rerun `python3 granular_result.py` and discuss results
