@@ -33,7 +33,6 @@ Resources:
           CidrIp: 0.0.0.0/0
   Coarse:
     Type: AWS::DynamoDB::Table
-    TableName: "coarse"
     Properties:
       AttributeDefinitions:
         -
@@ -51,4 +50,5 @@ Resources:
           KeyType: "RANGE"
       ProvisionedThroughput:
         ReadCapacityUnits: 5
-        WriteCapacityUnits: 5    
+        WriteCapacityUnits: 5
+      TableName: "coarse"  
