@@ -15,7 +15,7 @@ except:
 print("DDB-table coarse test:")
 try:    
     ddb.describe_table(
-        TableName='coarce'
+        TableName='coarse'
     )
     print("succeeded")
 except:
