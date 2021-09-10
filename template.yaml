@@ -17,6 +17,7 @@ Resources:
            
            sudo apt update -y
            git clone https://github.com/miromasat/iam-workshop-2021.git
+           sudo apt install awscli
            sudo apt install nodejs -y
            sudo apt install npm -y
            sudo npm install -g aws-cdk
