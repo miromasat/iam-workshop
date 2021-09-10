@@ -23,7 +23,7 @@ Amazon EC2 (EC2) instance and the other will be Amazon DynamoDB (DDB) Table (alt
     * More about managed policies [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies)
 4. Attach this newly created role `pu-access` to the instance you are logged into from `Step 2`. To verify, that instance can now access other services.
     * Notice, that the instance did not need to be restarted.
-    * Notice, that by querying the metaservice `curl 169.254.169.254` you get temporary credetials that in turn let you execute commands.
+    * Notice, that by querying the metaservice `curl http://169.254.169.254/latest/meta-data/iam/security-credentials/<role-name>` and `curl http://169.254.169.254/latest/meta-data/iam/info` you get temporary credetials that in turn let you execute commands.
     * rerun `python3 granular_result.py` and discuss results
 5. Let's now create another IAM Role, this time, using AWS IAM Policy Wizard. After going into IAM Console, we navigate into Policies Submenu and we follow the wizard and call the role `ddb-ro-access-policy`:
     * pick `DynamoDB` as a `Service` 
