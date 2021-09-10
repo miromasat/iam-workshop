@@ -35,7 +35,7 @@ gt = None
 
 print("DDB-scan coarse test:")
 try:    
-    ct = ddb.scan(TableName='granular')
+    ct = ddb.scan(TableName='coarse')
     print("succeeded")
 except:
     print("failed") 
