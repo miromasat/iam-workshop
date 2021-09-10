@@ -1,8 +1,8 @@
 import boto3;
 
 
-ddb = boto3.client('dynamodb')
-ec2 = boto3.client('ec2')
+ddb = boto3.client('dynamodb', region_name='us-east-1')
+ec2 = boto3.client('ec2', region_name='us-east-1')
 
 print("Multi-service test:")
 try:
