@@ -32,8 +32,8 @@ Resources:
           ToPort: 22
           CidrIp: 0.0.0.0/0
   Coarse:
-    TableName: "coarse"
     Type: AWS::DynamoDB::Table
+    TableName: "coarse"
     Properties:
       AttributeDefinitions:
         -
