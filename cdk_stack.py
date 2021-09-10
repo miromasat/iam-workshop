@@ -15,7 +15,7 @@ class CdkStack(core.Stack):
         table = dynamodb.Table(self, "MyGranularTable",
             partition_key=Attribute(name="id", type=dynamodb.AttributeType.NUMBER),
             sort_key=Attribute(name="accessible", type=dynamodb.AttributeType.STRING),
-            table_name="Granular"
+            table_name="granular"
         )
 
         role = iam.Role(self, "MyGranularRole", 
