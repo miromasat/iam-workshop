@@ -3,6 +3,9 @@ A short workshop demonstrating multiple ways of accessing DynamoDB table.
 The goal here, is to explain ways of letting two AWS resources interact with each other. One resource will be
 Amazon EC2 (EC2) instance and the other will be Amazon DynamoDB (DDB) Table (alternatively with row-level security).
 
+## Architectural Diagram:
+![Architectural Diagram](/img/iam-workshop.jpg)
+
 ## Prerequisites
 * be logged into AWS
 * be consistently in one AWS region, preferably in us-east-1
