@@ -26,5 +26,13 @@ class CdkStack(Stack):
             assumed_by=iam.ServicePrincipal('ec2.amazonaws.com'),
             role_name="ddb-ro-granular-access"
         )
+
+        ec2Runnerinstanceprofile = iam.CfnInstanceProfile(
+            self, "MyInstanceProfile",
+            instance_profile_name="ddb-ro-granular-access",
+            roles=["ddb-ro-granular-access"]
+        )
         
         table.grant_read_data(role)
+
+        
