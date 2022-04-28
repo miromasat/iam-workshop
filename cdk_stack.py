@@ -1,15 +1,19 @@
+
+from constructs import Construct
+
 from aws_cdk import (
+    Duration,
+    Stack,
     aws_iam as iam,
-    aws_dynamodb as dynamodb,
-    core
+    aws_dynamodb as dynamodb
 )
 
 from aws_cdk.aws_dynamodb import Attribute
 
 
-class CdkStack(core.Stack):
+class CdkStack(Stack):
 
-    def __init__(self, scope: core.Construct, construct_id: str, **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
         
         table = dynamodb.Table(self, "MyGranularTable",

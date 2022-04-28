@@ -21,8 +21,8 @@ Amazon EC2 (EC2) instance and the other will be Amazon DynamoDB (DDB) Table (alt
     * `aws --version`, which ensures cdk binary is installed
     * take a look at `granular_result.py` file and spend a minute understanding it.
     * run `python3 granular_result.py` and discuss results and see eveything fail :) why?
-3. Start by going into IAM and create an IAM Role with attached managed PowerUser Policy. Name this role `pu-access`
-    * PowerUser Policy document is very powerfull and will initially let us access not only DDB (and all its content) but all other services with the exception of IAM itself.
+3. Start by going into IAM and create an IAM Role with attached managed AdministratorAccess Policy. Name this role `pu-access`
+    * AdministratorAccess Policy document is very powerfull and will initially let us access not only DDB (and all its content) but all other services.
     * More about managed policies [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies)
 4. Attach this newly created role `pu-access` to the instance you are logged into from `Step 2`. To verify, that instance can now access other services.
     * Notice, that the instance did not need to be restarted.
@@ -43,11 +43,14 @@ Amazon EC2 (EC2) instance and the other will be Amazon DynamoDB (DDB) Table (alt
     * Take a look into the folder called `cdk`, this folder contains a simple CDK construct with some AWS SNS and AWS SQS constructs.
     * CDK serves a deployment mechanism for AWS, similarly to cloudformation and/or terraform, we could learn from ways it works and inner functioning how to enable granular policy generation. 
     * learn more about CDK, [here](https://aws.amazon.com/cdk/)
+    * create a new folder and enter it `mkdir ~/cdk && cd ~/cdk`
+    * run `cdk init sample-app --language python`
     * activate virtualenv via `source .venv/bin/activate` 
-    * note: if activation of virtualenv did not work, consider running `apt install python3.8-venv`
-    * amend project dependencies to contain DDB in `setup.py` 
     * install project dependencies using `pip install -r requirements.txt`
     * replace `cdk/cdk_stack.py` for a file that you can find in this repo. Explore the file.
-9. By running `cd deploy`, we deploy the Role, that goes like `ddb-ro-granular-access` and use very granular Policy
-    * we can also run `cdk synth` to preview what will get deployed
-10. Assume this newly created role similarly to `Step 7`, rerun `python3 granular_result.py` and discuss results
+    * run `cdk bootstrap`
+9. By running `cd synth`, we generate the AWS Clouformation template for Role, that goes like `ddb-ro-granular-access` and use very granular Policy. We also generate a new DynamoDB table called `granular`
+    * we can look at this template under `~/cdk/cdk.out/cdk.template.json`
+    * repeat `Step 4`
+10. By running `cd deploy`, we deploy these new resources, we mark a newly created role, wich allows for very granular scan only access to newly created DynamoDB Table
+11. Attach this newly created role to the same EC2 similarly to `Step 7`, rerun `python3 granular_result.py` and discuss results

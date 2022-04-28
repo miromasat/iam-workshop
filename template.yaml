@@ -9,20 +9,23 @@ Resources:
       SecurityGroups:
         - !Ref InstanceSecurityGroup
       KeyName: !Ref KeyName
-      ImageId: 'ami-09e67e426f25ce0d7'
-      InstanceType: 't3a.medium'
+      ImageId: 'ami-06b8f0fe534eceb95'
+      InstanceType: 'c6g.medium'
       UserData:
         Fn::Base64: !Sub |
            #!/bin/bash 
-           sudo apt update -y
-           git clone https://github.com/miromasat/iam-workshop-2021.git
-           sudo apt install nodejs -y
-           sudo apt install npm -y
+           sudo yum update -y
+           sudo yum install git -y
+           git clone https://github.com/miromasat/iam-workshop.git
+           sudo yum install curl -y
+           curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash -
+           sudo yum install nodejs -y
            sudo npm install -g aws-cdk
-           sudo apt install python3-pip -y
+           sudo curl -O https://bootstrap.pypa.io/get-pip.py
+           python3 get-pip.py --user
            pip install boto3
-           sudo snap install aws-cli --classic
-           sudo snap install jq
+           sudo yum install jq -y
+           rm get-pip.py
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
