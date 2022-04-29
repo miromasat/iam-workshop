@@ -15,6 +15,7 @@ Resources:
         Fn::Base64: 
           !Sub |
             #!/bin/bash 
+            cd /home/ec2-user
             sudo yum update -y
             sudo yum install git -y
             git clone https://github.com/miromasat/iam-workshop.git
@@ -22,11 +23,8 @@ Resources:
             curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash -
             sudo yum install nodejs -y
             sudo npm install -g aws-cdk
-            sudo curl -O https://bootstrap.pypa.io/get-pip.py
-            python3 get-pip.py --user
-            pip install boto3
+            pip3 install boto3
             sudo yum install jq -y
-            rm get-pip.py -y
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
